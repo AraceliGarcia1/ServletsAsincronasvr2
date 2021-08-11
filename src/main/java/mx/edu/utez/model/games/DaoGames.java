@@ -21,28 +21,28 @@ public class DaoGames {
         List<BeanGames> listGames = new ArrayList<>();
         try{
            con= ConnectionMySQL.getConnection() ;
-           cstm= con.prepareCall("call sp_findAll");
+           cstm= con.prepareCall("SELECT *FROM games");
            rs= cstm.executeQuery();
 
-           while (rs.next()){
-               BeanCategory beanCategory= new BeanCategory();
-               BeanGames beanGames= new BeanGames();
 
-               beanCategory.setIdCategory(rs.getInt("idCategory"));
-               beanCategory.setName(rs.getString("name"));
-               beanCategory.setStatus(rs.getInt("status"));
+            while(rs.next()){
+                BeanCategory beanCategory = new BeanCategory();
+                BeanGames beanGames = new BeanGames();
 
-               beanGames.setIdGames(rs.getInt("idGames"));
-               beanGames.setName(rs.getString("name"));
-               byte[] imgBytes = rs.getBytes("imgGame");
-               String photo = Base64.getEncoder().encodeToString(imgBytes);
-               beanGames.setDatePremiere(rs.getString("datePremiere"));
-               beanGames.setStatus(rs.getInt("status"));
+                beanCategory.setIdCategory(rs.getInt("idCategory"));
+                beanCategory.setName(rs.getString("name"));
+                beanCategory.setStatus(rs.getInt("status"));
 
-               beanGames.setCategory_idCategory(beanCategory);
+                beanGames.setIdGames(rs.getInt("idGames"));
+                beanGames.setName(rs.getString("name"));
+                beanGames.setImgGame(Base64.getEncoder().encodeToString(rs.getBytes("imgGames")));
+                beanGames.setDatePremiere(rs.getString("datePremiere"));
+                beanGames.setStatus(rs.getInt("status"));
+                beanGames.setCategory_idCategory(beanCategory);
 
-               listGames.add(beanGames);
-           }
+                listGames.add(beanGames);
+            }
+
         }catch (SQLException e){
             CONSOLE.error("Ha ocurrido un error: " + e.getMessage());
 
@@ -93,7 +93,7 @@ public class DaoGames {
             con = ConnectionMySQL.getConnection();
             cstm = con.prepareCall("{call sp_create(?,?,?,?)}");
             cstm.setString(1, games.getName());
-            cstm.setBytes(2, Base64.getDecoder().decode(games.getImgGame()));
+            cstm.setBlob(2,image);
             cstm.setString(3, games.getDatePremiere());
             cstm.setInt(4, games.getCategory_idCategory().getIdCategory());
             cstm.execute();

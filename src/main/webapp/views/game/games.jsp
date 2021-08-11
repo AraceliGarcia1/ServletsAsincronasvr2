@@ -10,31 +10,44 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-    <title>Videojuegos</title>
+    <title>Listado de videojuegos</title>
     <link rel="stylesheet" href="${context}/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${context}/assets/dist/css/styles.css">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 <body>
-<div id="content">
-    <button type="button" class="btn btn-outline-success" onclick="listOfGames();">Listar Videojuegos</button>
-    <table class="table table-info table-striped border-">
-        <thead class="table-danger">
-
+<table id="container" class="table table-info table-striped border-">
+    <thead class="table-danger">
+    <tr>
+        <th>#</th>
         <th>Nombre</th>
-        <th>Fecha de estreno</th>
-        <th>Fotografia</th>
-        <th>Categoria</th>
-        </thead>
-        <tbody id="bodyGames">
-
-
-        </tbody>
-
-    </table>
+        <th>Fecha</th>
+        <th>Imagen</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<%-- MODAL --%>
+<div id="main" >
+            <form action="${context}/createGames" method="POST">
+                <input type="text" name="name" placeholder="Nombre"/>
+                <input type="image" name="imgGame" placeholder="Imagen"/>
+                <input type="text" name="datePremiere" placeholder="Fecha de Estreno"/>
+                <input type="text" name="Category_idCategoria.name" placeholder="Categoria"/>
+                <div style="display: block;width: 60%;margin: 0 auto">
+                    <button type="submit" name="send" placeholder="enviar"/><i class="fas fa-check-square"></i> Registrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+                    <div id="status"></div>
+                </div>
+            </form>
 </div>
 <script src="${context}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="${context}/assets/dist/js/main.js"></script>
+<script src="${context}/assets/dist/js/main.js"></script>
 </body>
+
+
+
 </html>
