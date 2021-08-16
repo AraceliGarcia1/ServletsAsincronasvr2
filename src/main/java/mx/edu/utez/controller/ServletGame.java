@@ -2,6 +2,7 @@ package mx.edu.utez.controller;
 
 import com.google.gson.Gson;
 import mx.edu.utez.model.category.BeanCategory;
+import mx.edu.utez.model.category.DaoCategory;
 import mx.edu.utez.model.games.BeanGames;
 import mx.edu.utez.model.games.DaoGames;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class ServletGame extends HttpServlet {
         //request.setAttribute("listGames", new DaoGames().findAll());
         //request.getRequestDispatcher("/views/game/games.jsp").forward(request, response);
         map.put("listGames", new DaoGames().findAll());
+        map.put("listCategorys",new DaoCategory().findAll());
         write(response, map);
     }
 

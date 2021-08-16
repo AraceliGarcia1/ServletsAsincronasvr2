@@ -21,7 +21,7 @@ public class DaoGames {
         List<BeanGames> listGames = new ArrayList<>();
         try{
            con= ConnectionMySQL.getConnection() ;
-           cstm= con.prepareCall("SELECT *FROM games");
+           cstm= con.prepareCall("SELECT G.*,C.idCategory,C.name as 'Name_category',C.status as 'status_category' FROM games G INNER  JOIN  category C WHERE G.Category_idCategory=C.idCategory ");
            rs= cstm.executeQuery();
 
 
@@ -30,12 +30,12 @@ public class DaoGames {
                 BeanGames beanGames = new BeanGames();
 
                 beanCategory.setIdCategory(rs.getInt("idCategory"));
-                beanCategory.setName(rs.getString("name"));
-                beanCategory.setStatus(rs.getInt("status"));
+                beanCategory.setName(rs.getString("Name_category"));
+                beanCategory.setStatus(rs.getInt("status_category"));
 
                 beanGames.setIdGames(rs.getInt("idGames"));
                 beanGames.setName(rs.getString("name"));
-                beanGames.setImgGame(Base64.getEncoder().encodeToString(rs.getBytes("imgGames")));
+                beanGames.setImgGame(Base64.getEncoder().encodeToString(rs.getBytes("imgGame")));
                 beanGames.setDatePremiere(rs.getString("datePremiere"));
                 beanGames.setStatus(rs.getInt("status"));
                 beanGames.setCategory_idCategory(beanCategory);

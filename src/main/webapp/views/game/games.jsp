@@ -13,12 +13,14 @@
     <title>Listado de videojuegos</title>
     <link rel="stylesheet" href="${context}/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${context}/assets/dist/css/styles.css">
+    <link rel="stylesheet" href="${context}/assets/plugins/bootstrap/css/tabla.css">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 <body>
+
 <table id="container" class="table table-info table-striped border-">
     <thead class="table-danger">
-    <tr>
+    <tr id="tabla">
         <th>#</th>
         <th>Nombre</th>
         <th>Fecha</th>
@@ -29,25 +31,27 @@
     </thead>
     <tbody></tbody>
 </table>
-<%-- MODAL --%>
+
+<%-- MODAL REGISTRO --%>
 <div id="main" >
-            <form action="${context}/createGames" method="POST">
-                <input type="text" name="name" placeholder="Nombre"/>
-                <input type="image" name="imgGame" placeholder="Imagen"/>
-                <input type="text" name="datePremiere" placeholder="Fecha de Estreno"/>
-                <input type="text" name="Category_idCategoria.name" placeholder="Categoria"/>
-                <div style="display: block;width: 60%;margin: 0 auto">
-                    <button type="submit" name="send" placeholder="enviar"/><i class="fas fa-check-square"></i> Registrar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+    <div class="abs-center">
+            <form center>
+                <input type="text" id="name" name="name" placeholder="Nombre"/>
+                <input type="file" id="imgGame" name="imgGame" placeholder="Imagen"/>
+                <input type="date" id="datePremiere"  name="datePremiere" placeholder="Fecha de Estreno"/>
+                <label>Categoria</label>
+                <select id="category_id"></select>
+                <div style="display: block;width: 70%;margin:10px auto">
+                    <button type="button" id="btn-registrar" class="btn btn-success"  /><i class="fas fa-check-square"></i> Registrar</button>
+                    <button type="button" class="btn btn-danger " data-bs-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
                     <div id="status"></div>
                 </div>
             </form>
+    </div>
 </div>
 <script src="${context}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="${context}/assets/dist/js/main.js"></script>
 </body>
-
-
 
 </html>

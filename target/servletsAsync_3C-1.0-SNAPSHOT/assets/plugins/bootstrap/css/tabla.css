@@ -1,0 +1,18 @@
+table{
+    table-layout: fixed;
+}
+
+#tabla th{
+    width: 130px;
+    overflow: auto;
+}
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#C0A3F5;
+}
+
+.form {
+    width: 800px;
+}
